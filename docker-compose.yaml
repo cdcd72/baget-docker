@@ -1,0 +1,18 @@
+version: "3.9"
+
+services:
+  nuget-server:
+    container_name: nuget-server
+    image: loicsharma/baget
+    ports:
+      - 5555:80
+    environment:
+      ApiKey: your-api-key
+      Storage__Type: FileSystem
+      Storage__Path: /var/baget/packages
+      Database__Type: Sqlite
+      Database__ConnectionString: Data Source=/var/baget/baget.db
+      Search__Type: Database
+    restart: unless-stopped
+    volumes:
+      - ./baget:/var/baget
